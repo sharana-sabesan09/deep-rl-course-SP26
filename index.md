@@ -80,14 +80,14 @@ Students should be familiar with basic CS concepts such as Search (A*, Monte Car
 #### Recommended Preparation for Those Without Required Knowledge
 Undergrad Intro to AI/RL, and grad level Intro to Deep Learning / NLP types of courses are highly recommended
 
-#### Website [pearls-lab.github.io/ai-agents-course-WI26](http://pearls-lab.github.io/ai-agents-course-SP26)
+#### Website [pearls-lab.github.io/deep-rl-course-SP26/](https://pearls-lab.github.io/deep-rl-course-SP26/)
 
 #### Instructors: [Prithviraj Ammanabrolu](https://prithvirajva.com)
 
-#### TAs: TBD
+#### TAs: [Bosung Kim](https://bosung.github.io), [Christopher Cui](https://christopherzc.github.io), [Yiran (Jenny) Shen](https://jennyshen056.github.io), [Shree Venkatesh](http://shree-venkatesh.github.io/)
 
 #### Time and Place
-- Spring 2026: TBD
+- Spring 2026: MOS0114, Tues-Thurs 6:30PM-7:50PM
 
 Office Hours (see the [Staff]({{ site.baseurl }}/staff) page for office hour locations)
 
