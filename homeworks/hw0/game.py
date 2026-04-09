@@ -311,6 +311,7 @@ class Actions:
         return action
     reverseDirection = staticmethod(reverseDirection)
 
+    # given two coordinates, what direction is it?
     def vectorToDirection(vector):
         dx, dy = vector
         if dy > 0:
@@ -324,6 +325,7 @@ class Actions:
         return Directions.STOP
     vectorToDirection = staticmethod(vectorToDirection)
 
+    # If I go north, how does my position change?
     def directionToVector(direction, speed = 1.0):
         dx, dy =  Actions._directions[direction]
         return (dx * speed, dy * speed)

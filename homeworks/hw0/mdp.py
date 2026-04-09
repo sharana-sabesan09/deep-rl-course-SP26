@@ -14,6 +14,14 @@
 
 import random
 
+# NEW Q: From each state, what action gives the best
+# expected long term reward
+# important in Q5
+
+# this file updates the value of every state
+# you sweep through all states, in search you explore states as needed
+
+
 class MarkovDecisionProcess:
 
     def getStates(self):
@@ -29,12 +37,15 @@ class MarkovDecisionProcess:
         """
         abstract
 
+    # if no actions, state is dead. 
+    # handle in Q5
     def getPossibleActions(self, state):
         """
         Return list of possible actions from 'state'.
         """
         abstract
 
+    # used to calculate expected value of taking ana action
     def getTransitionStatesAndProbs(self, state, action):
         """
         Returns list of (nextState, prob) pairs
@@ -56,6 +67,7 @@ class MarkovDecisionProcess:
         """
         abstract
 
+    # uhh. is the state dead or nah
     def isTerminal(self, state):
         """
         Returns true if the current state is a terminal state.  By convention,

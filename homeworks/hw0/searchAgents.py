@@ -43,6 +43,9 @@ import time
 import search
 import pacman
 
+"""
+This is highkey a not very smart agent. It can only go west. 
+"""
 class GoWestAgent(Agent):
     "An agent that goes West until it can't."
 
@@ -57,6 +60,7 @@ class GoWestAgent(Agent):
 # This portion is written for you, but will only work #
 #       after you fill in parts of search.py          #
 #######################################################
+
 
 class SearchAgent(Agent):
     """
@@ -74,7 +78,11 @@ class SearchAgent(Agent):
 
     Note: You should NOT change any code in SearchAgent
     """
-
+    """
+     * getattr(search, fn) turns a string like bfs into the actual function
+     * If the function uses a heuristic, implement A*, if not BFS, DFS UCS
+     * self.searchType = gets problem type
+    """
     def __init__(self, fn='depthFirstSearch', prob='PositionSearchProblem', heuristic='nullHeuristic'):
         # Warning: some advanced Python magic is employed below to find the right functions and problems
 
@@ -102,6 +110,13 @@ class SearchAgent(Agent):
         self.searchType = globals()[prob]
         print('[SearchAgent] using problem type ' + prob)
 
+    """
+     * This is where alg runs. 
+      1. Create a problem
+      2. Call your search alg
+      3. store result in self.actions
+       * Function returns a list of directions
+    """
     def registerInitialState(self, state):
         """
         This is the first time that the agent sees the layout of the game
@@ -121,6 +136,12 @@ class SearchAgent(Agent):
         print('Path found with total cost of %d in %.1f seconds' % (totalCost, time.time() - starttime))
         if '_expanded' in dir(problem): print('Search nodes expanded: %d' % problem._expanded)
 
+    """
+     * executes pre-computer path
+     * keep in mind: search alg is run once at the beginning, 
+     * after that Pacman follows the plan
+     * returns an action in that plan
+    """
     def getAction(self, state):
         """
         Returns the next action in the path chosen earlier (in
@@ -137,6 +158,7 @@ class SearchAgent(Agent):
         else:
             return Directions.STOP
 
+
 class PositionSearchProblem(search.SearchProblem):
     """
     A search problem defines the state space, start state, goal test, successor
@@ -148,6 +170,12 @@ class PositionSearchProblem(search.SearchProblem):
     Note: this search problem is fully specified; you should NOT change it.
     """
 
+    """
+     * state = Pacman's position on the board
+     * a node = one position in the search. It is comprised on state, path, and cost
+     * fringe aka frontier = list of nodes you plan to explore next
+     * function repeatedly calls getSuccessors function
+    """
     def __init__(self, gameState, costFn = lambda x: 1, goal=(1,1), start=None, warn=True, visualize=True):
         """
         Stores the start and goal.
@@ -196,6 +224,7 @@ class PositionSearchProblem(search.SearchProblem):
          cost of expanding to that successor
         """
 
+        # calculates successor state for each direction!
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             x,y = state
@@ -230,6 +259,7 @@ class PositionSearchProblem(search.SearchProblem):
             cost += self.costFn((x,y))
         return cost
 
+# useful for UCS
 class StayEastSearchAgent(SearchAgent):
     """
     An agent for position search with a cost function that penalizes being in
@@ -254,12 +284,14 @@ class StayWestSearchAgent(SearchAgent):
         costFn = lambda pos: 2 ** pos[0]
         self.searchType = lambda state: PositionSearchProblem(state, costFn)
 
+# estimate distance to goal
 def manhattanHeuristic(position, problem, info={}):
     "The Manhattan distance heuristic for a PositionSearchProblem"
     xy1 = position
     xy2 = problem.goal
     return abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
 
+# diff formula for estimate distance to goal
 def euclideanHeuristic(position, problem, info={}):
     "The Euclidean distance heuristic for a PositionSearchProblem"
     xy1 = position
@@ -270,6 +302,8 @@ def euclideanHeuristic(position, problem, info={}):
 # This portion is incomplete.  Time to write code!  #
 #####################################################
 
+# state includes position and remaining food
+# successor moves and updates food grid
 class FoodSearchProblem:
     """
     A search problem associated with finding the a path that collects all of the
@@ -355,7 +389,7 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     "*** YOUR CODE HERE ***"
     return 0
 
-
+# returns path length, behaves like BFS
 def mazeDistance(point1: Tuple[int, int], point2: Tuple[int, int], gameState: pacman.GameState) -> int:
     """
     Returns the maze distance between any two points, using the search functions

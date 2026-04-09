@@ -30,7 +30,10 @@ import sys
 import inspect
 import heapq, random
 
-
+"""
+Random number generator with a fixed seed, so behavior is repeatable. 
+This helps with grading and debugging because randomness become deterministic. 
+"""
 class FixedRandom:
     def __init__(self):
         fixedState = (3, (2147483648, 507801126, 683453281, 310439348, 2597246090, \
@@ -130,6 +133,12 @@ class FixedRandom:
  Data structures useful for implementing SearchAgents
 """
 
+
+"""
+Outlines key functions of a stack to be used for DFS
+Last in First Out (last element added is the first one to be removed)
+
+"""
 class Stack:
     "A container with a last-in-first-out (LIFO) queuing policy."
     def __init__(self):
@@ -146,7 +155,13 @@ class Stack:
     def isEmpty(self):
         "Returns true if the stack is empty"
         return len(self.list) == 0
+"""
+Queue is used for BFS implementation
+FIFO (earliest item added comes out first)+
 
+BUT: new items go to front of list (index 0)
+Items are removed from end of list
+"""
 class Queue:
     "A container with a first-in-first-out (FIFO) queuing policy."
     def __init__(self):
@@ -167,6 +182,10 @@ class Queue:
         "Returns true if the queue is empty"
         return len(self.list) == 0
 
+"""
+Used for UCS and A*
+Removes the item with lower priority
+"""
 class PriorityQueue:
     """
       Implements a priority queue data structure. Each inserted item
@@ -205,6 +224,11 @@ class PriorityQueue:
         else:
             self.push(item, priority)
 
+"""
+Usually, you have to calculate priority yourself. To push something
+you need to do pq.push(item, priority). This below class lets you do
+pq.push(item), bu calculating priority fpr you.
+"""
 class PriorityQueueWithFunction(PriorityQueue):
     """
     Implements a priority queue with the same push/pop signature of the
@@ -221,7 +245,9 @@ class PriorityQueueWithFunction(PriorityQueue):
         "Adds an item to the queue with priority from the priority function"
         PriorityQueue.push(self, item, self.priorityFunction(item))
 
-
+"""
+distance between two points on a grid (no diagonals)
+"""
 def manhattanDistance( xy1, xy2 ):
     "Returns the Manhattan distance between points xy1 and xy2"
     return abs( xy1[0] - xy2[0] ) + abs( xy1[1] - xy2[1] )

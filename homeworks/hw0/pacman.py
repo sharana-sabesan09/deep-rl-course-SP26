@@ -80,6 +80,7 @@ class GameState:
         return tmp
     getAndResetExplored = staticmethod(getAndResetExplored)
 
+    # checks if agent is pacman or ghost and determines legal actions based on that
     def getLegalActions( self, agentIndex=0 ):
         """
         Returns the legal actions for the agent specified.
@@ -92,6 +93,7 @@ class GameState:
         else:
             return GhostRules.getLegalActions( self, agentIndex )
 
+    # transition matrix, returns new GameState of state after an action
     def generateSuccessor( self, agentIndex, action):
         """
         Returns the successor state after the specified agent takes the action.
@@ -213,6 +215,13 @@ class GameState:
     def isWin( self ):
         return self.data._win
 
+    """
+    GAMESTATE vs SEARCHSTATE
+    Game state is a snapshot of entire world, 
+    search state is a smaller representation chosen by search problem
+    * PositionSearchProblem consists of just x and y coordinates
+    * FoodSearchProblem consists of the position and food grid
+    """
     #############################################
     #             Helper methods:               #
     # You shouldn't need to call these directly #
@@ -328,6 +337,7 @@ class PacmanRules:
     """
     PACMAN_SPEED=1
 
+    # returns possible moves given current walls and config
     def getLegalActions( state ):
         """
         Returns a list of possible actions.
@@ -335,6 +345,7 @@ class PacmanRules:
         return Actions.getPossibleActions( state.getPacmanState().configuration, state.data.layout.walls )
     getLegalActions = staticmethod( getLegalActions )
 
+    # updates state after Pacman moves
     def applyAction( state, action ):
         """
         Edits the state to reflect the results of the action.
@@ -597,6 +608,8 @@ def readCommand( argv ):
 
     return args
 
+# searches Python files for Agents.py, imports them, finds class name
+# to load in agents
 def loadAgent(pacman, nographics):
     # Looks through all pythonPath Directories for the right module,
     pythonPathStr = os.path.expandvars("$PYTHONPATH")

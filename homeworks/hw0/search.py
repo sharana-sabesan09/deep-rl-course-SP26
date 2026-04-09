@@ -89,13 +89,75 @@ def depthFirstSearch(problem: SearchProblem) -> List[Directions]:
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+
+    dfs_stack = util.Stack();
+    currPath = []
+
+    # we store both the state and directions
+    # state is stored so we know what we have already visited
+    dfs_stack.push((problem.getStartState(), currPath))
+    visited_List = []
+
+    while(not dfs_stack.isEmpty()):
+
+        # pop if visited
+        currTuple = dfs_stack.pop()
+
+        # check if we reached goal state
+        if(problem.isGoalState(currTuple[0])):
+            return currTuple[1]
+        
+        # If not visited
+        if(not (currTuple[0] in visited_List)):
+            # visit it
+            visited_List.append(currTuple[0])
+            currPath = currTuple[1]
+
+            # check all possible future states aka neighbors
+            for possibleSuccessor in problem.getSuccessors(currTuple[0]):
+                if not (possibleSuccessor[0] in visited_List):
+                    # add to stack
+                    newPath = currPath + [possibleSuccessor[1]]
+                    dfs_stack.push((possibleSuccessor[0], newPath))
+    
+    return None
 
 def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+    bfs_queue = util.Queue();
+
+    # we store both the state and directions
+    # state is stored so we know what we have already visited
+    bfs_queue.push((problem.getStartState(), []))
+    visited_List = []
+
+    while(not bfs_queue.isEmpty()):
+
+        # pop if explored
+        currTuple = bfs_queue.pop()
+
+        # check if we reached goal state
+        if(problem.isGoalState(currTuple[0])):
+            return currTuple[1]
+        
+        # If not visited
+
+        if(not (currTuple[0] in visited_List)):
+
+            # visit it
+            visited_List.append(currTuple[0])
+
+            # check all possible future states aka neighbors
+            for possibleSuccessor in problem.getSuccessors(currTuple[0]):
+                if not (possibleSuccessor[0] in visited_List):
+                    
+                    # add to queue
+                    newPath = currTuple[1] + [possibleSuccessor[1]]
+                    bfs_queue.push((possibleSuccessor[0], newPath))
+    
+    return None
 
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
