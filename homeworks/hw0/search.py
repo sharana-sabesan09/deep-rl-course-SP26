@@ -161,8 +161,47 @@ def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
 
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    
+    # for context, we only worry about finding shortest path between start
+    # and goal state! 
+
+    # create prioprity queue and visited list
+    ucs_pq = util.PriorityQueue()
+
+    ucs_pq.push(problem.getStartState(), 0)
+
+    # store state, parent, and action that got you there
+    # using things to find optikal path and trace it
+    visited_List = {problem.getStartState(): [0, None, None] }
+
+    while(not ucs_pq.isEmpty()):
+
+        
+        curr = ucs_pq.pop()
+        
+        # check if we reached goal state
+        if(problem.isGoalState(curr)):
+            # parent and action
+            visited_List[curr]
+            while(true):
+                
+
+            return 
+
+        for possibleSuccessor in problem.getSuccessors(curr):
+            if(not possibleSuccessor[0] in visited_List):
+                ucs_pq.push(possibleSuccessor[0], possibleSuccessor[2] + visited_List[curr][0])
+                visited_List[possibleSuccessor[0]] = [possibleSuccessor[2] + visited_List[curr][0], curr, possibleSuccessor[1]]
+            
+            # found a better cost path
+            if(visited_List[possibleSuccessor[0]][0] > possibleSuccessor[2] + visited_List[curr][0]):
+                ucs_pq.update(possibleSuccessor[0], possibleSuccessor[2] + visited_List[curr][0])
+                visited_List[possibleSuccessor[0]] = [possibleSuccessor[2] + visited_List[curr][0], curr, possibleSuccessor[1]]
+
+        
+    # if nothing happens
+    return None
+
 
 def nullHeuristic(state, problem=None) -> float:
     """
