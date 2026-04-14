@@ -200,15 +200,19 @@ For some extensions, you may need to modify the base code.  That's fine!  You ca
 
 Submissions should be done on [Gradescope]({{page.submission_link}}).
 
-1. Submit a following files to "HW 1 - Part 1 Action Castle". 
+1. Submit the following files to **HW 1 - Part 1 Action Castle**:
 
-1) (20pt) `action_castle.ipynb` (this will be automatically graded on Gradescope)
-2) (12pt) `my_game.ipynb` that runs the initial version of your game (this will be manually graded by TAs)
-3) (4pt) A text file called `playthrough.txt` with all of the commands that we need to issue to complete your game. It should be a plain text file with one command per line.
-4) (2pt) A text file called `README.md` containing a short paragraph describing your game, and why you picked that topic.
-5) (2pt) An image `game-visualization.jpg` (or .pdf) showing the directed graph for your game. 
+1) (20pt) `action_castle.ipynb` (automatically graded on Gradescope)
 
-IMPORTANT: Do not zip or compress your files! Submit them as individual files.
+2) (12pt) `my_game.ipynb` that runs the initial version of your game (manually graded by the TAs)
+
+3) (4pt) A text file called `playthrough.txt` listing every command needed to complete your game—one command per line in plain text.
+
+4) (2pt) A text file called `README.md` with a short paragraph describing your game and why you chose that topic.
+
+5) (2pt) An image `game-visualization.jpg` (or `.pdf`) showing the directed graph for your game.
+
+**Important:** Do not submit a zip or other archive. Upload each required file separately on Gradescope.
 
 
 ## Grading
